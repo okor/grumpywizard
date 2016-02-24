@@ -1,0 +1,13 @@
+:notes:        'Here are some notes about this test'
+:thumbor_key:  'yourkeyhere'
+:thumbor_host: 'http://<your thumbor>'
+:images:
+  - :original: 'http://<some image url>'
+    :options:
+      :filters:
+      - 'format(webp)'
+  - :original: 'http://<some other image url>'
+    :options:
+      :filters:
+      - 'format(webp)'
+

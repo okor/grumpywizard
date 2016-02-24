@@ -1,0 +1,36 @@
+---
+title: Results
+---
+
+<% if defined? results %>
+
+  <% results.each do |key, result| %>
+    <div class="result">
+      <div class="stats">
+        <div class="stat">Label: <span class="val"><%= result[:label] %></span></div>
+        <div class="stat">DSSIM: <span class="val"><%= result[:dssim] %></span></div>
+
+        <div class="stat">Size reduction:
+          <span class="val"><%= (((result[:original][:file_size].to_f - result[:transformed][:file_size].to_f) / result[:original][:file_size].to_f) * 100).to_i %> %</span>
+        </div>
+        <div class="stat">Response Time:  <span class="val"><%= result[:transformed][:response_time].round(2) %> sec</span></div>
+      </div>
+
+      <div class="cocoen">
+        <%= image_tag result[:original][:file].gsub(pwd + '/source', '') %>
+        <%= image_tag result[:transformed][:file].gsub(pwd + '/source', '') %>
+        <%= image_tag result[:dssim_image].gsub(pwd + '/source', '') %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      setTimeout(function(){
+        $('.cocoen').cocoen();
+      }, 500);
+    });
+  </script>
+
+<% end %>

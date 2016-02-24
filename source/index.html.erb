@@ -1,0 +1,14 @@
+---
+title: Tests
+---
+
+<div class="main">
+  Tests:
+
+  <ul>
+    <% config[:result_dirs].reverse.each do |result| %>
+      <li><a href="/resultsview/<%= result %>.html"><%= result %></a></li>
+    <% end %>
+  </ul>
+
+</div>
