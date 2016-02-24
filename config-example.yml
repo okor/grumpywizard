@@ -1,6 +1,9 @@
 :notes:        'Here are some notes about this test'
 :thumbor_key:  'yourkeyhere'
 :thumbor_host: 'http://<your thumbor>'
+:thresholds:
+  :dssim: 0.0017
+  :starttransfer_time: 1.0
 :images:
   - :original: 'http://<some image url>'
     :options:

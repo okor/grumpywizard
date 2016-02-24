@@ -22,7 +22,7 @@ def handle(response, result)
     File.open(result[:file], "wb") do |file|
       file.write(response.response_body)
     end
-    result[:response_time] = response.time
+    result[:starttransfer_time] = response.starttransfer_time
   elsif response.timed_out?
     result[:fail] = true
     result[:fail_reason] = "Request timed out"
@@ -56,7 +56,7 @@ end
   ['original', 'transformed'].each do |version|
     @results[index.to_s][version.to_sym] = {
       file:           File.join(@pwd, "#{save_dir}/#{version}.jpg"),
-      response_time:  0
+      starttransfer_time:  0
     }
     image_url = version == 'original' ? image[version.to_sym] : get_thumbor_url(image)
     re = Typhoeus::Request.new(image_url)
@@ -81,9 +81,9 @@ end
     @results[index.to_s][:dssim] = `dssim -o "#{save_dir}/difference.png" #{original_png} #{transformed_png}`.split(' ')[0]
     @results[index.to_s][:dssim_image] = File.join(@pwd, "#{save_dir}/difference.png")
 
-    if @results[index.to_s][:dssim].to_f > @config[:dssim_threshold].to_f
+    if @results[index.to_s][:dssim].to_f > @config[:thresholds][:dssim].to_f
       @results[index.to_s][:transformed][:fail] = true
-      @results[index.to_s][:transformed][:fail_reason] = "DSSIM of #{@results[index.to_s][:dssim]} if over the max threshold of #{@config[:dssim_threshold]}"
+      @results[index.to_s][:transformed][:fail_reason] = "DSSIM of #{@results[index.to_s][:dssim]} if over the max threshold of #{@config[:thresholds][:dssim]}"
     end
   end
 end
