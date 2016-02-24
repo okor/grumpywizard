@@ -1,4 +1,3 @@
-# thumbor-app
 repo for testing Thumbor functionality and image quality
 
 
